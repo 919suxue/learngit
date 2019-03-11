@@ -39,6 +39,7 @@ module.exports = {
     }
   },
   module: {
+    loaders:["style","css","sass"],
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
@@ -73,6 +74,20 @@ module.exports = {
         options: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        loader: 'tslint-loader'
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
         }
       }
     ]
